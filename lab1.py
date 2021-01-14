@@ -14,7 +14,7 @@ parser.add_argument('-lines', dest="lines", action='store_true', help='line-by-l
 parser.add_argument('-fulltext', dest="fulltext", action='store_true', help='fulltext search')
 parser.add_argument('-limit', dest="limit", type=int, help='limit of occurrences')
 
-args = parser.parse_args(["input.txt", "строка", "output.txt", "-distance", "5", "-natural", "-fulltext"])
+args = parser.parse_args()
 print(args)
 
 # Список символов видимых для человека одинаково
@@ -144,14 +144,13 @@ if __name__ == '__main__':
     if args.output is not None:
         out = open(args.output, "w", encoding="UTF8")
     searchStr = args.str
+    """Ищем вхожждения в тексте"""
+    res = findInText(inp.read(), searchStr)
     if args.output is not None:
-        """Ищем вхожждения в тексте"""
-        res = findInText(inp.read(), searchStr)
-        if args.output is not None:
-            out.write(res)
-            out.close()
-        else:
-            print(res)
+        out.write(res)
+        out.close()
+    else:
+        print(res)
     inp.close()
 
     pass
